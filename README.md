@@ -1,11 +1,15 @@
 # Project Description
 
-A brief description of what this repository is for and what it contains
+O’Meara et al. Transcriptional Reversion of Cardiac Myocyte Fate During Mammalian Cardiac Regeneration. Circ Res. Feb 2015. PMID: 25477501
 
 # Contributors
+Sunny Yang yang98@bu.edu - Data Curator 
 
-List contributor names and github user names, or email addresses if desired
+Daniel Goldstein djgoldst@bu.edu - Programmer
 
+Jason Rose jjrose@bu.edu - Analyst
+
+Sooyoun Lee leesu@bu.edu - Biologist
 # Repository Contents
 
 Provide a brief description of each script/code file in this repo, what it does, and how to execute it
