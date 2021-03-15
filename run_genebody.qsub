@@ -1,0 +1,20 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+PATH1="/project/bf528/project_2/reference/"
+PATH2="/projectnb/bf528/users/saxophone/project2/scripts/programmer/P0_1_tophat/"
+
+module load R
+module load python3 samtools rseqc
+
+geneBody_coverage.py -r $PATH1'annot/mm9.bed' -i $PATH2'accepted_hits.bam' -o P0_1_genebody 
+
+echo "Job finished: $(date +%F)"

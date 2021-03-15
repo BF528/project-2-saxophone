@@ -1,0 +1,20 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+PATH1="/project/bf528/project_2/reference/"
+PATH2="/projectnb/bf528/users/saxophone/project2/scripts/programmer/"
+
+module load cufflinks
+
+cufflinks -p 16 -u -G $PATH1"annot/mm9.gtf" -b $PATH1"mm9.fa" -o $PATH2"P0_1_cufflinks" $PATH2"P0_1_tophat/accepted_hits.bam"
+ 
+
+echo "Job finished: $(date +%F)"

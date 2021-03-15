@@ -1,0 +1,8 @@
+module load R
+module python3 samtools rseqc
+
+#Inner Distance
+inner_distance.py -r /project/bf528/project_2/reference/annot/mm9.bed -i accepted_hits.bam.bai -o inner_dist
+
+#Bam Stat
+bam_stat.py -i accepted_hits.bam
