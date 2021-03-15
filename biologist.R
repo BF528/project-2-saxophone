@@ -6,10 +6,10 @@ P0 <- read.csv("P0/genes.fpkm_tracking", sep = "\t", stringsAsFactors = F)
 AD_1 <- read.csv("AD_1/genes.fpkm_tracking", sep = "\t", stringsAsFactors = F)
 AD_2 <- read.csv("AD_2/genes.fpkm_tracking", sep = "\t", stringsAsFactors = F)
 
+#7_1 plots of the most prominent GO terms
 if (!require("tidyverse")) install.packages("tidyverse")
 if (!require("reshape2")) install.packages("reshape2")
 
-# build the function: take the FPKM value from a gene list
 subset.gene <- function(x1,x2,x3,target.gene){
   result1 <- rep(0,length(target.gene))
   result2 <- rep(0,length(target.gene))
@@ -40,8 +40,29 @@ cellc_list <- c("Cdc7","E2f8","Cdk7","Cdc26","Cdc6","Cdc27",
 cellc_gene.fpkm <- subset.gene(P0,AD_1,AD_2,cellc_list)
 cellc_gene.fpkm
 
+#7_2 Compare the results obtained from the DAVID analysis in 6.7
+up <- read.csv("up_reg.csv",header=F,stringsAsFactors=F)
+names(up) <- up[2,]
+up <- up %>% filter(Category!="Category") %>% filter(FDR!="")
 
-#7.3
+up_paper <- read.csv("upreg_paper_reference.csv",stringsAsFactors=F) %>% 
+  filter(Category %in% c("GOTERM_MF_FAT","GOTERM_BP_FAT","GOTERM_CC_FAT"))
+up_select <- up$Term %in% up_paper$Term
+up$Overlap <- ifelse(up_select,'Yes','No')  
+write.csv(up,"table1.csv")
+
+down <- read.csv("down_reg.csv",header=F,stringsAsFactors=F)
+names(down) <- down[2,]
+down <- down %>% filter(Category!="Category") %>% filter(FDR!="")
+
+down_paper <- read.csv("downreg_paper_reference.csv",stringsAsFactors=F) %>% 
+  filter(Category %in% c("GOTERM_MF_FAT","GOTERM_BP_FAT","GOTERM_CC_FAT"))
+down_select <- down$Term %in% down_paper$Term
+down$Overlap <- ifelse(down_select,'Yes','No')  
+write.csv(down,"table2.csv")
+
+
+#7_3 FPKM matrix
 P4_1 <- read.csv("4_1/genes.fpkm_tracking",sep="\t",header=T,stringsAsFactors = F)
 P4_2 <- read.csv("4_2/genes.fpkm_tracking",sep="\t",header=T,stringsAsFactors = F)
 P7_1 <- read.csv("7_1/genes.fpkm_tracking",sep="\t",header=T,stringsAsFactors = F)
