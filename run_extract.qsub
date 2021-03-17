@@ -1,0 +1,18 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+# your commands here
+module load fastqc
+module load sratoolkit
+fastq-dump -I --split-files P0_1.sra -O /projectnb/bf528/users/saxophoneproject2/samples
+
+echo "Job finished: $(date +%F)"
+
