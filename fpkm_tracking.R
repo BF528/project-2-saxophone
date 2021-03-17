@@ -1,7 +1,7 @@
 #Read in the genes.fpkm_tracking file 
 fpkm <- read.table("/projectnb/bf528/users/saxophone/project2/scripts/programmer/P0_1_cufflinks/genes.fpkm_tracking", header = TRUE, sep = "\t")
 #Filter out genes where FPKM<500
-fpkm <- fpkm[fpkm$FPKM>500,]
+fpkm <- fpkm[fpkm$FPKM>250,]
 #Create histogram of gene name vs. log(FPKM)
 par(mar=c(6,5,4,2))
 options(scipen=999)
